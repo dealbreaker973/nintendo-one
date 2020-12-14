@@ -131,3 +131,4 @@ dmypy.json
 # downloaded images
 NintendoOne/static/images/game/*.jpg
 NintendoOne/static/images/game/screenshots/*.jpg
+NintendoOne/media/images/games/*.jpg

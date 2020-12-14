@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %} Games on Sale {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="row col-9">
+        <div class="col-3">
+            <strong>Filters</strong>
+            <button type="button" class="btn btn-primary">Clear all</button>
+            <div class="dropdown-divider"></div>
+            <ul>
+                <li>Deals</li>
+                <li>DLC Available</li>
+            </ul>
+        </div>
+        <div class="col-9">
+            <div class="row row-cols-1 row-cols-md-4">
+    
+                {% for game in game_list %}
+                <div class="col mb-4">
+                    <div class="card border-light">
+                        <img src={{ game.image.url }} class="card-img-top" alt="...">
+                        <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">{{ game.release_date | date }}</h6>
+                        <h5 class="card-title">{{ game.name }}</h5>
+                        <p class="card-text">{{ game.description }}</p>
+                        </div>
+                    </div>
+                    </div>
+                {% empty %}
+                {% endfor %}
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+<script type="text/javascript">
+</script>
+
+{% endblock javascripts %}

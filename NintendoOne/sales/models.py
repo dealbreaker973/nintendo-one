@@ -14,7 +14,7 @@ class Game(models.Model):
     description = models.CharField(max_length=200, default='')
 
     image_url = models.URLField(null=True, blank=True)
-    image = models.ImageField(upload_to='static/images/game/', null=True, blank=True)
+    image = models.ImageField(upload_to='images/games', null=True, blank=True)
     
     is_new = models.BooleanField(default=False)
     membership_required = models.BooleanField(default=False)
@@ -24,10 +24,11 @@ class Game(models.Model):
         before save to db, download the game image
         '''
         if self.image_url:
-            file_save_dir = 'static/images/game/'
+            file_save_dir = 'media/images/games'
+            reference_dir = 'images/games'
             filename = urlparse(self.image_url).path.split('/')[-1]
             urllib.request.urlretrieve(self.image_url, os.path.join(file_save_dir, filename))
-            self.image = os.path.join(file_save_dir, filename)
+            self.image = os.path.join(reference_dir, filename)
             self.image_url = ''
         super(Game, self).save()
 
@@ -54,7 +55,7 @@ class GameScreenShot(models.Model):
     Stores game screenshots provided by Nintendo official API
     '''
     game = models.ForeignKey(Game, on_delete=models.CASCADE, null=True, blank=True)
-    image = models.ImageField(upload_to='static/images/game/screenshots')
+    image = models.ImageField(upload_to='images/games/screenshots')
     image_url = models.URLField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
@@ -62,9 +63,10 @@ class GameScreenShot(models.Model):
         before save to db, download the game image
         '''
         if self.image_url:
-            file_save_dir = 'static/images/game/screenshots'
+            file_save_dir = 'media/images/games/screenshots'
+            reference_dir = 'images/games/screenshots'
             filename = urlparse(self.image_url).path.split('/')[-1]
             urllib.request.urlretrieve(self.image_url, os.path.join(file_save_dir, filename))
-            self.image = os.path.join(file_save_dir, filename)
+            self.image = os.path.join(reference_dir, filename)
             self.image_url = ''
         super(Game, self).save()

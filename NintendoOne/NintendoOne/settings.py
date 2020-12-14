@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'sales',
     'djmoney',
     'djmoney.contrib.exchange',
-    'pure_pagination',
 ]
 
 MIDDLEWARE = [
